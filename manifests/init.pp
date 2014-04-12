@@ -19,6 +19,9 @@
 # [*gid*]
 #   gid for group
 # 
+# [*mode*]
+#   directory mode for path ${base_dir}/repositories. Should match umask in $settings to work with gitweb/cgit
+#
 # [*package*]
 #   gitolite install package name
 # 
@@ -26,7 +29,7 @@
 #   path to gitolite
 #
 # [*admin_user*]
-#   gitolite admin user associated with the ssh public key. Default 'gitolite'
+#   gitolite admin user associated with the ssh public key.
 #
 # [*settings*]
 #   hash of RC settings in .gitolite.rc 
@@ -54,6 +57,7 @@ class gitolite(
   $group = 'gitolite3',
   $uid = undef,
   $gid = undef,
+  $mode = '0750',
   $package = 'gitolite3',
   $base_dir = '/var/lib/gitolite3',
   $admin_user = 'gitolite',

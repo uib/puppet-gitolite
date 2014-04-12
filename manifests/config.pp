@@ -12,6 +12,7 @@ class gitolite::config(
   $group = $gitolite::group,
   $uid = $gitolite::uid,
   $gid = $gitolite::gid,
+  $mode = $gitolite::mode,
   $base_dir = $gitolite::base_dir,
   $admin_user = $gitolite::admin_user,
   $settings = $gitolite::settings
@@ -43,11 +44,11 @@ class gitolite::config(
 
   file { $base_dir: 
     ensure => directory,
-    mode => 750,
+    mode => $mode,
   }
   
   # Copy skel files to new home  
-  exec { 'etc/skel':
+  exec { 'copy gitolite etc/skel':
     command => "cp -r /etc/skel/. ${base_dir}",
     user => $user,
     creates => "${base_dir}/.bashrc",
@@ -76,5 +77,11 @@ class gitolite::config(
     content => template("${module_name}/gitolite.rc.erb"),
     require => Exec['gitolite-setup']
   }
-  
+
+  file { "${base_dir}/repositories":
+    ensure => directory,
+    mode => $mode,
+    require => Exec['gitolite-setup']
+  }
+
 }
