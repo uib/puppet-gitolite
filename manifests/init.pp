@@ -25,6 +25,9 @@
 # [*base_dir*]
 #   path to gitolite
 #
+# [*admin_user*]
+#   gitolite admin user associated with the ssh public key. Default 'gitolite'
+#
 # [*settings*]
 #   hash of RC settings in .gitolite.rc 
 #   See templates/gitolite.rc.erb for full list configurable elements
@@ -53,6 +56,7 @@ class gitolite(
   $gid = undef,
   $package = 'gitolite3',
   $base_dir = '/var/lib/gitolite3',
+  $admin_user = 'gitolite',
   $settings = {}
 ) {
 

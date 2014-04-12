@@ -13,6 +13,7 @@ class gitolite::config(
   $uid = $gitolite::uid,
   $gid = $gitolite::gid,
   $base_dir = $gitolite::base_dir,
+  $admin_user = $gitolite::admin_user,
   $settings = $gitolite::settings
 ) {
 
@@ -55,12 +56,12 @@ class gitolite::config(
   
   file { 'gitolite-key':
     ensure => file,
-    path => "${base_dir}/gitolite.pub",
+    path => "${base_dir}/${admin_user}.pub",
     content => $ssh_key
   }
 
   exec { 'gitolite-setup':
-    command => "gitolite setup -pk gitolite.pub",
+    command => "gitolite setup -pk ${admin_user}.pub",
     creates => "${base_dir}/.gitolite.rc",
     cwd => $base_dir,
     user => $user,
