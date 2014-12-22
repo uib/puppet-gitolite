@@ -61,22 +61,22 @@ class gitolite::config(
     content => $ssh_key
   }
 
-  exec { 'gitolite-setup':
-    command => "gitolite setup -pk ${admin_user}.pub",
-    creates => "${base_dir}/.gitolite.rc",
-    cwd => $base_dir,
-    user => $user,
-    environment => "HOME=${base_dir}",
-    require => File['gitolite-key'],
-  }
-  
   file { 'gitolite.rc':
     ensure => file,
     mode => 0600,
     path => "${base_dir}/.gitolite.rc",
     content => template("${module_name}/gitolite.rc.erb"),
-    require => Exec['gitolite-setup']
   }
+
+  exec { 'gitolite-setup':
+    command => "gitolite setup -pk ${admin_user}.pub",
+    creates => "${base_dir}/repositories",
+    cwd => $base_dir,
+    user => $user,
+    environment => "HOME=${base_dir}",
+    require => [File['gitolite.rc'], File['gitolite-key']]
+  }
+  
 
   file { "${base_dir}/repositories":
     ensure => directory,
