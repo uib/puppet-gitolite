@@ -78,7 +78,7 @@
         # called "local" in your gitolite-admin repo.  For a SECURITY WARNING
         # on this, see http://gitolite.com/gitolite/cust.html#pushcode
         # LOCAL_CODE                =>  "$rc{GL_ADMIN_BASE}/local",
-        
+
 <%- if @settings['local_code'] -%>
         LOCAL_CODE                  =>  "<%=@settings['local_code']%>",
 <% end %>
@@ -155,7 +155,7 @@
             <% if @settings['cgit'] != 'enable' -%># <% end %>'cgit',
 
             # allow repo-specific hooks to be added
-            # 'repo-specific-hooks',
+            <% if @settings['repo-specific-hooks'] != 'enable' -%># <% end %>'repo-specific-hooks',
 
         # performance, logging, monitoring...
 
