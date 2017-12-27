@@ -18,13 +18,13 @@
 #
 # [*gid*]
 #   gid for group
-# 
+#
 # [*mode*]
 #   directory mode for path ${base_dir}/repositories. Should match umask in $settings to work with gitweb/cgit
 #
 # [*package*]
 #   gitolite install package name
-# 
+#
 # [*base_dir*]
 #   path to gitolite
 #
@@ -32,7 +32,7 @@
 #   gitolite admin user associated with the ssh public key.
 #
 # [*settings*]
-#   hash of RC settings in .gitolite.rc 
+#   hash of RC settings in .gitolite.rc
 #   See templates/gitolite.rc.erb for full list configurable elements
 #   Example: {
 #     umask => '0027,
@@ -45,7 +45,7 @@
 #     daemon => 'disable'
 #     mirroring => 'enable',
 #     cgit => 'enable'
-#   }  
+#   }
 #
 # === Authors
 #

@@ -13,5 +13,5 @@ class gitolite::install(
   package { $package:
     ensure => latest,
   }
-  
+
 }
